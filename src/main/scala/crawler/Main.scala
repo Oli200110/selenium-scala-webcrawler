@@ -1,20 +1,19 @@
-import CrawlDriver.dispatchDriver
-import org.openqa.selenium.By
+package crawler
+
+import crawler.CrawlDriver.dispatchDriver
 import org.openqa.selenium.remote.{DesiredCapabilities, RemoteWebDriver}
 
 import java.net.URL
 import scala.collection.mutable
-import scala.collection.parallel.CollectionConverters.seqIsParallelizable
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.duration.{Duration, DurationInt}
+import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}
-import scala.util.{Failure, Success}
 
 
 object Main {
   private val HUB_URL = "http://localhost:4444/wd/hub"
+  val MAX_POOL_SIZE = 100
   private val NUM_OF_DRIVERS = 2
-  private val MAX_POOL_SIZE = 1000
   private val START_URL = "https://www.telex.hu"
 
   def main(args: Array[String]): Unit = {
